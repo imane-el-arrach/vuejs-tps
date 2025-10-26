@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qcm</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(194, 190, 190);
+        margin-top: 80px;
+        padding: 0;
+      }
+
+      .nav_score {
+        background-color: crimson;
+        padding: 5px;
+      }
+
+      h3, h5 {
+        margin-top: auto;
+        text-align: center;
+        color: white;
+      }
+
+      form  {
+        background-color: white;
+        padding: 50px 60px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+        width: 350px;
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      #quiz-container{
+        background-color: white;
+        padding: 50px 60px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 500px;
+        margin: 0 auto;
+        margin-bottom: 50px;
+      }
+
+      #submit-quiz{
+        
+        padding: 20px 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        margin-bottom: 50px;
+      
+
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        color: #333;
+      }
+
+      input, select {
+        margin-top: 5px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      button{
+        background-color: rgb(7, 194, 63);
+        border-radius: 5px;
+        color: white;
+        padding: 8px;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+  <div>
+    <form id="quiz-formul">
+      <label>Nombre des questions :
+        <input type="number" value="5" name="nombre_question">
+      </label>
+
+      <label>veuillez choisir une categorie:
+        <select name="category" id="category">
+          <option value="22">Géographie</option>
+          <option value="12">Entertainment : music</option>
+          <option value="18">Science : computers</option>
+        </select>
+      </label>
+
+      <label> veuillez Choisir la difficulte:
+        <select name="difficulte">
+          <option value="easy">easy</option>
+          <option value="medium">medium</option>
+          <option value="hard">hard</option>
+        </select>
+      </label>
+
+      <label> veuillez choisir le type de question :
+        <select name="type">
+          <option value=""> any type</option>
+          <option value="multiple"> Multiple </option>
+          <option value="boolean"> vrai/faux</option>
+        </select>
+      </label>
+      <button type="submit">Commencer votre Quiz </button>
+    </form>
+
+    <div id="quiz-container"></div>
+
+    <div style="text-align:center;">
+      <button id="submit-quiz" style="display:none;">Valider votre reponses</button>
+    </div>
+
+    <div id="resultat" style="text-align:center; font-size:20px; margin-top:20px;"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("quiz-formul");
+    const quizContainer = document.getElementById("quiz-container");
+    const submitButton = document.getElementById("submit-quiz");
+    const resultatDiv = document.getElementById("resultat");
+    let bonnesReponse = [];
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nombre_question = form.elements.nombre_question.value;
+      const categorie = form.elements.category.value;
+      const difficulte = form.elements.difficulte.value;
+      const type = form.elements.type.value;
+
+      let urlapi = `https://opentdb.com/api.php?amount=${nombre_question}`;
+      if (categorie) urlapi += `&category=${categorie}`;
+      if (difficulte) urlapi+= `&difficulty=${difficulte}`;
+      if (type) urlapi += `&type=${type}`;
+
+      try {
+        const response = await fetch(urlapi);
+        const data = await response.json();
+        const questions = data.results;
+
+        quizContainer.innerHTML = "";
+        bonnesReponse = [];
+
+        questions.forEach((question, index) => {
+           bonnesReponse.push(question.correct_answer);
+
+          const div = document.createElement("div");
+          div.classList.add("box-question");
+
+          const toutesReponse = [...question.incorrect_answers, question.correct_answer]
+
+          div.innerHTML = `
+            <h4>Question ${index + 1}</h4>
+            <p>${question.question}</p>
+            ${toutesReponse.map(a => `
+              <label>
+                <input type="radio" name="q${index}" value="${a}"> ${a}
+              </label><br>
+            `).join("")}
+          `;
+          quizContainer.appendChild(div);
+        });
+
+        submitButton.style.display = "block";
+        resultatDiv.innerHTML = "";
+
+      } catch (erreur) {
+        console.error("erreur :", erreur);
+      }
+    });
+
+    submitButton.addEventListener("click", () => {
+      let score = 0;
+      const totale = bonnesReponse.length;
+
+      bonnesReponse.forEach((correct, i) => {
+        const userReponse= document.querySelector(`input[name="q${i}"]:checked`);
+        if (userReponse && userReponse.value === correct) {
+          score++;
+        }
+      });
+
+      resultatDiv.innerHTML = `Vous Avez <b>${score}/${totale}</b> Bonnes Réponses !`;
+      submitButton.style.display = "none";
+    });
+  </script>
+</body>
+</html>
