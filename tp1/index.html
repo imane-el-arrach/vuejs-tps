@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue CDN TP1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+   <div id="app" style="text-align: center;">
+    <h1>TP1</h1>
+    <p>exercice1</p>
+   <button @click="changeTitle">{{title}}</button>
+   <p>exercice2</p>
+   <button @click="count++">++</button>
+   {{count}}
+    <button @click="count--">--</button>
+    <br>
+    <p>exercice3</p>
+    <label>veuillez saisir un texte ne contenant pas des espaces: <input v-model="texte" placeholder="tapez ici !" @input="verifierEspace"></label>
+     <p v-if="showMessage" style="color:red">le texte est invalide (il contient des espaces)</p>
+    <p>exercice4</p>
+
+        <h3>choisir la couleur:</h3>
+        <label> - rouge <input type="radio" v-model="couleur" value="red"></label>
+        <br>
+        <label> - bleu <input type="radio" v-model="couleur" value="blue"></label>
+        <br>
+        <label><h3> afficher/cacher message<input type="checkbox" v-model="afficher"></h3></label>
+        <p v-if="afficher" :style="{color:couleur}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis accusamus officiis expedita iusto rerum veniam eius reiciendis fugit amet! Nihil quis tenetur corporis illo repudiandae cupiditate esse similique explicabo eum?</p>
+      
+    </div>
+   <script src="app.js">
+ 
+   </script>
+
+  </body>
+</html>
