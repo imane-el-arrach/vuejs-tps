@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue CDN TP2</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+   <div id="app" >
+   <label class="label1">Filtre sur le nom:
+    <input class="input" type="text" name="nom" v-model="filtrenom">
+   </label>
+   <br>
+   <div class="label2">
+   <label >Options: 
+    <br>
+    <label>Homme            
+       <input type="checkbox" v-model="affichehomme"></label>
+    <label>Femme    
+      <input type="checkbox" v-model="affichefemme"></label>
+    <label>Telephone       
+      <input type="checkbox" v-model="affichecontact"></label>
+    <label>Photo    
+      <select v-model="affichetailleimage">
+      <option value="thumbnail">Petit</option>
+      <option  value="medium" selected>Moyen</option>
+      <option value="large">Grand</option>
+    </select></label>
+    <label>Mise en forme     
+      <input type="checkbox" v-model="miseenforme"></label>
+   </label>
+   </div>
+   <br>
+   <div >
+    <div v-for="p in filterpersonne" :class="{'forme': miseenforme}">
+      <img :src="p.picture[affichetailleimage]" alt="photo">
+      <p>{{ p.name.title }} {{ p.name.first }} {{ p.name.last }} - {{ p.location.country }}</p>
+    
+      <div v-if="affichecontact">
+        <p>{{p.phone}} | {{p.email}} </p>
+    </div>
+   </div>
+    </div>
+  </div>
+   <script src="app.js">
+ 
+   </script>
+
+  </body>
+</html>
