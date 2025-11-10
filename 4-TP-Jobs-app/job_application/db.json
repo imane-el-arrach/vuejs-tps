@@ -1,0 +1,28 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "Développeur Frontend",
+      "description": "Création d'interfaces modernes avec Vue.js",
+      "salaire": 4000,
+      "annee_experience": 2,
+      "date_creation": "2025-11-10"
+    },
+    {
+      "id": "2",
+      "title": "Ingénieur Backend",
+      "description": "Développement d’API REST sécurisées",
+      "salaire": 6000,
+      "annee_experience": 3,
+      "date_creation": "2025-11-09"
+    },
+    {
+      "id": "dc5a",
+      "title": "médecin",
+      "description": "interne",
+      "salaire": 20000,
+      "annee_experience": 2,
+      "date_creation": "2025-11-10"
+    }
+  ]
+}
