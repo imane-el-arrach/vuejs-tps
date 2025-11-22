@@ -1,0 +1,40 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Premier article",
+      "body": "Ceci est le contenu complet de l'article numéro 1.",
+      "tags": [
+        "vue",
+        "javascript"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Deuxième article",
+      "body": "Un deuxième article avec un texte plus long...",
+      "tags": [
+        "web",
+        "frontend"
+      ]
+    },
+    {
+      "id": "9c67",
+      "title": "github",
+      "body": "bla bla bla ",
+      "tags": [
+        "git"
+      ]
+    },
+    {
+      "id": "6a04",
+      "title": "tp-vue",
+      "body": "codes ",
+      "tags": [
+        "javascript",
+        "vuejs",
+        "css"
+      ]
+    }
+  ]
+}
