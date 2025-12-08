@@ -1,4 +1,10 @@
-# ensa-vote
+
+ ENSA Vote - Vue.js Application
+
+Application web développée en Vue.js pour la gestion des votes à l'ENSA.
+
+**Lien du site (Firebase Hosting)**  
+https://ensa-vote-6db18.web.app
 
 ## Project setup
 ```
