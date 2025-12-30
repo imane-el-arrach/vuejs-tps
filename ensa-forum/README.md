@@ -1,5 +1,5 @@
 # ensa-forum
-
+Projet déployé sur Firebase Hosting : (https://ensa-forum-14ae2.web.app)
 ## Project setup
 ```
 npm install
@@ -15,5 +15,5 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
